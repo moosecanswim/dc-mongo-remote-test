@@ -1,0 +1,4 @@
+mongo_hosts="mongo:27018"
+name="kyle"
+# mongo_user="mongoU"
+# mongo_password="password"
