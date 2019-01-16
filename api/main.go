@@ -34,13 +34,12 @@ func main() {
 
 	err := viper.ReadInConfig()
 	if err != nil {
-		log.Fatalln(fmt.Errorf("Fatal error config file %s \n", err))
+		log.Fatalln(fmt.Errorf("fatal error config file %s", err))
 	}
 
 	username := viper.GetString("mongo_user")
 	password := viper.GetString("mongo_password")
 	database := viper.GetString("mongo_db")
-	// address := viper.GetString("mongo_hosts")
 	address := viper.GetString("mongo_host")
 
 	log.Println("my name is")
@@ -49,10 +48,14 @@ func main() {
 	log.Println("Viper config address")
 	log.Println(address)
 
+	log.Println(fmt.Sprintf("mongo_user: %s mongo_password: %s, mongo_db: %s, mongo_host: %s", username, password, database, address))
+
 	var connURL string
 	if username == "" || password == "" {
+		log.Println("No username or password")
 		connURL = fmt.Sprintf("mongodb://%s/%s", address, database)
 	} else {
+		log.Println("Authenticating with username and password")
 		connURL = fmt.Sprintf("mongodb://%s:%s@%s/%s", username, password, address, database)
 	}
 	log.Println(connURL)
